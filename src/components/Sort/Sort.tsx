@@ -1,6 +1,16 @@
 import React from 'react';
 
 const Sort: React.FC = () => {
+
+    const [open, setOpen] = React.useState(false)
+    const [sortActive, setSortActive] = React.useState(0)
+    const sortList = ["популярности", "цене", "алфавиту"]
+
+    const sortHandler = (i: React.SetStateAction<number>) => {
+        setSortActive(i)
+        setOpen(false)
+    }
+
     return (
         <div className="sort">
             <div className="sort__label">
@@ -17,17 +27,18 @@ const Sort: React.FC = () => {
                     />
                 </svg>
                 <b>Сортировка по:</b>
-                <span>популярности</span>
+                <span onClick={() => setOpen(!open)}>{sortList[sortActive]}</span>
             </div>
-            <div className="sort__popup">
+            {open && <div className="sort__popup">
                 <ul>
-                    <li className="active">популярности</li>
-                    <li>цене</li>
-                    <li>алфавиту</li>
+                    {sortList.map((s, i) => <li
+                        key={i}
+                        onClick={() => sortHandler(i)}
+                        className={i === sortActive ? "active" : ""}>{s}</li>)}
                 </ul>
-            </div>
+            </div>}
         </div>
-    );
-};
+    )
+}
 
 export default Sort;
