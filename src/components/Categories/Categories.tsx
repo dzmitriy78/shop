@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 const Categories: React.FC = () => {
 
     const [activeIndex, setActiveIndex] = useState(0)
-    const categories = ["Все", "Мясные", "Вегетарианская", "Гриль", "Острые", "Закрытые"]
+    const categories = ["Все", "Металл", "Эмалированная сталь", "Нержавеющая сталь", "Эмаль", "Алюминий"]
 
     return (
         <div className="categories">

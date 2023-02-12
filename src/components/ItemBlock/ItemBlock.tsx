@@ -13,7 +13,7 @@ const ItemBlock: React.FC<ItemBlockPropsType> = ({title, price, types, sizes, im
     const [itemCount, setItemCount] = useState(0)
     const [activeSize, setActiveSize] = useState(0)
     const [activeType, setActiveType] = useState(0)
-    const typeNames = ["тонкое", "традиционное"]
+    const typeNames = ["пластик", "металл"]
 
     const addItemHandler = () => {
         setItemCount((prev) => prev + 1)
@@ -24,24 +24,24 @@ const ItemBlock: React.FC<ItemBlockPropsType> = ({title, price, types, sizes, im
             <img
                 className="pizza-block__image"
                 src={imageUrl}
-                alt="Pizza"
+                alt="KETTLE"
             />
             <h4 className="pizza-block__title">{title}</h4>
             <div className="pizza-block__selector">
-                <ul>
+                <ul>Материал <br/>ручки:
                     {types.map((t, i) => <li key={i}
                                              onClick={() => setActiveType(i)}
                                              className={i === activeType ? "active" : ""}>{typeNames[t]}</li>)}
                 </ul>
-                <ul>
+                <ul> Объем:
                     {sizes.map((s, i) => <li key={i}
                                              onClick={() => setActiveSize(i)}
-                                             className={i === activeSize ? "active" : ""}> {s} см.</li>)
+                                             className={i === activeSize ? "active" : ""}> {s} л.</li>)
                     }
                 </ul>
             </div>
             <div className="pizza-block__bottom">
-                <div className="pizza-block__price">{price} ₽</div>
+                <div className="pizza-block__price">{price} BYN</div>
                 <button className="button button--outline button--add" onClick={addItemHandler}>
                     <svg
                         width="12"

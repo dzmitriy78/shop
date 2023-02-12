@@ -1,0 +1,202 @@
+[
+  {
+    "id": 0,
+    "imageUrl": "https://img.5element.by/import/images/ut/goods/good_a4fa2bce-5d2b-11ea-80bf-005056844aec/good_img_2c0b2937-5d3e-11ea-80c7-005056840c70_600.jpg",
+    "title": "Чайник LARA LR00-72",
+    "types": [0, 1],
+    "sizes": [1, 2, 3],
+    "price": 77,
+    "category": 3,
+    "rating": 4
+  },
+  {
+    "id": 1,
+    "imageUrl": "https://img.5element.by/import/images/ut/goods/good_6b241a26-30de-11ec-bb94-0050560120e8/rds-1506-chaynik-3-0-l-loft-professional-rondell-1_600.jpg",
+    "title": "Чайник Rondell Loft Professional RDS-1506",
+    "types": [0],
+    "sizes": [1, 3],
+    "price": 130,
+    "category": 3,
+    "rating": 6
+  },
+  {
+    "id": 2,
+    "imageUrl": "https://img.5element.by/import/images/ut/goods/good_3b2fdfb0-fdc5-11ec-bb95-0050560120e8/90650-coolinar-chaynik-so-svistkom-3-l-6-1_600.jpg",
+    "title": "Чайник RESTO Coolinar 90650",
+    "types": [0],
+    "sizes": [1, 2, 3],
+    "price": 100,
+    "category": 2,
+    "rating": 4
+  },
+  {
+    "id": 3,
+    "imageUrl": "https://img.5element.by/import/images/ut/goods/good_693ef06a-e044-11e5-80c6-005056841522/good_img_83f2f116-7749-11e7-80eb-005056842056_600.jpg",
+    "title": "Чайник со свистком TEFAL C7922024",
+    "types": [1],
+    "sizes": [1, 2, 3],
+    "price": 130,
+    "category": 3,
+    "rating": 2
+  },
+  {
+    "id": 4,
+    "imageUrl": "https://img.5element.by/import/images/ut/goods/good_64023bdd-5aa3-11e8-80c4-005056840c70/good_img_8a0c7e17-5f47-11e8-8158-005056841710_600.jpg",
+    "title": "Чайник со свистком MAUNFELD MRK-119BG",
+    "types": [0, 1],
+    "sizes": [2, 3],
+    "price": 159,
+    "category": 3,
+    "rating": 8
+  },
+  {
+    "id": 5,
+    "imageUrl": "https://img.5element.by/import/images/ut/goods/good_c039b39a-3713-11ec-bb94-0050560120e8/lr00-62-matovyy-chaynik-lara-1_600.jpg",
+    "title": "Чайник со свистком Lara LR00-62",
+    "types": [0],
+    "sizes": [2, 3],
+    "price": 86,
+    "category": 3,
+    "rating": 2
+  },
+  {
+    "id": 6,
+    "imageUrl": "https://img.5element.by/import/images/ut/goods/good_6bdae5b2-cfd2-11e5-80c0-005056841522/c7921024-chaynik-2-5l-tefal-1_600.jpg",
+    "title": "Чайник со свистком TEFAL C7921024",
+    "types": [0, 1],
+    "sizes": [1, 2],
+    "price": 675,
+    "category": 3,
+    "rating": 9
+  },
+  {
+    "id": 7,
+    "imageUrl": "https://img.5element.by/import/images/ut/goods/good_c039b3aa-3713-11ec-bb94-0050560120e8/lr00-69-zerkalnyy-chaynik-lara-1_600.jpg",
+    "title": "Чайник со свистком Lara LR00-69",
+    "types": [0, 1],
+    "sizes": [2, 2.7, 3],
+    "price": 150,
+    "category": 4,
+    "rating": 10
+  },
+  {
+    "id": 8,
+    "imageUrl": "https://img.5element.by/import/images/ut/goods/good_2dffc6a2-76f3-11ec-bb94-0050560120e8/lt-7046-cuirve-chaynik-3l-lamart-1_600.jpg",
+    "title": "Чайник со свистком Lamart Cuivre LT7046",
+    "types": [0, 1],
+    "sizes": [1, 3],
+    "price": 110,
+    "category": 5,
+    "rating": 10
+  },
+  {
+    "id": 9,
+    "imageUrl": "https://img.5element.by/import/images/ut/goods/good_40573d92-1295-11ea-80c7-005056840c70/good_img_af0cd8ee-14f1-11ea-80c7-005056840c70_600.jpg",
+    "title": "Чайник со свистком VITESSE VS-7813",
+    "types": [0, 1],
+    "sizes": [1.5, 2.5, 3],
+    "price": 185,
+    "category": 5,
+    "rating": 7
+  },
+{
+    "id": 10,
+    "imageUrl": "https://img.5element.by/import/images/ut/goods/good_7dbde9a0-6018-11e0-83a7-00199975ebdc/good_img_b04d3a97-77a9-11e7-80eb-005056842056_600.jpg",
+    "title": "Чайник RONDELL RDS-100",
+    "types": [0, 1],
+    "sizes": [1, 2],
+    "price": 205,
+    "category": 5,
+    "rating": 4
+  },
+{
+    "id": 11,
+    "imageUrl": "https://img.5element.by/import/images/ut/goods/good_7c1d9a31-9aec-11ec-bb94-0050560120e8/52-659122-chaynik-stalnoy-emalirovannyy-halkidiki-perfecto-linea-1_600.jpg",
+    "title": "Чайник PERFECTO LINEA Халкидики 52-659122",
+    "types": [0, 1],
+    "sizes": [1, 2.2],
+    "price": 67,
+    "category": 2,
+    "rating": 4
+  },
+{
+    "id": 12,
+    "imageUrl": "https://img.5element.by/import/images/ut/goods/good_7c1d9a3a-9aec-11ec-bb94-0050560120e8/52-951922-chaynik-stalnoy-emalirovannyy-seriya-tradicii-perfecto-linea-1_600.jpg",
+    "title": "Чайник Perfecto Linea Традиции 52-951922",
+    "types": [0, 1],
+    "sizes": [1.5, 2.2],
+    "price": 85,
+    "category": 2,
+    "rating": 5
+  },
+{
+    "id": 13,
+    "imageUrl": "https://img.5element.by/import/images/ut/goods/good_e3dd3a92-6596-11e9-80c7-005056840c70/good_img_15fcce53-672b-11e9-80c7-005056840c70_600.jpg",
+    "title": "Чайник Сибирские товары С42716.3П",
+    "types": [0, 1],
+    "sizes": [ 2.5, 3.5],
+    "price": 45,
+    "category": 4,
+    "rating": 2
+  },
+{
+    "id": 14,
+    "imageUrl": "https://img.5element.by/import/images/ut/goods/good_72c0ca22-1577-11e8-8120-005056841710/good_img_6cd77758-1d3b-11e8-8126-005056841710_600.jpg",
+    "title": "Чайник Perfecto Linea Любимая кухня 52-520522",
+    "types": [0, 1],
+    "sizes": [1.5, 2.2],
+    "price": 75,
+    "category": 4,
+    "rating": 5
+  },
+{
+    "id": 15,
+    "imageUrl": "https://img.5element.by/import/images/ut/goods/good_864b1cd4-6596-11e9-80c7-005056840c70/good_img_cfe853c9-65b4-11e9-80c7-005056840c70_600.jpg",
+    "title": "Чайник Сибирские товары С2714.3",
+    "types": [0, 1],
+    "sizes": [1.5, 2.3],
+    "price": 35,
+    "category": 1,
+    "rating": 2
+  },
+{
+    "id": 16,
+    "imageUrl": "https://img.5element.by/import/images/ut/goods/good_f59be463-c6d5-11e2-94ae-005056af0003/good_img_630d0c47-7803-11e7-80eb-005056842056_600.jpg",
+    "title": "Чайник SSENZO PTIDK114V",
+    "types": [0, 1],
+    "sizes": [2, 3],
+    "price": 74,
+    "category": 1,
+    "rating": 3
+  },
+{
+    "id": 17,
+    "imageUrl": "https://img.5element.by/import/images/ut/goods/good_8e041f47-c6d4-11e2-94ae-005056af0003/good_img_630d0c45-7803-11e7-80eb-005056842056_600.jpg",
+    "title": "Чайник SSENZO PTIDK100S",
+    "types": [0, 1],
+    "sizes": [1, 2],
+    "price": 84,
+    "category": 1,
+    "rating": 6
+  },
+  {
+    "id": 18,
+    "imageUrl": "https://img.5element.by/import/images/ut/goods/good_b7ae8d6f-6596-11e9-80c7-005056840c70/good_img_c451b441-672a-11e9-80c7-005056840c70_600.jpg",
+    "title": "Чайник Сибирские товары С2716.34",
+    "types": [0, 1],
+    "sizes": [2, 3.5],
+    "price": 90,
+    "category": 4,
+    "rating": 6
+  },
+  {
+    "id": 20,
+    "imageUrl": "https://img.5element.by/import/images/ut/goods/good_7c1d9a3c-9aec-11ec-bb94-0050560120e8/52-659222-chaynik-stalnoy-emalirovannyy-seriya-zolotoy-grebeshok-perfecto-linea-1_600.jpg",
+    "title": "Чайник Perfecto Linea Золотой гребешок 52-659222",
+    "types": [0, 1],
+    "sizes": [1, 2.2],
+    "price": 78,
+    "category": 2,
+    "rating": 7
+  }
+]
