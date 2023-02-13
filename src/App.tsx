@@ -3,10 +3,17 @@ import './scss/app.scss';
 import Header from "./components/Header/Header";
 import Categories from "./components/Categories/Categories";
 import Sort from "./components/Sort/Sort";
-import ItemBlock from "./components/ItemBlock/ItemBlock";
-import items from "./assets/items.json"
+import ItemBlock, {ItemType} from "./components/ItemBlock/ItemBlock";
 
-function App() {
+const App: React.FC = () => {
+
+    const [items, setItems] = React.useState<ItemType[]>([])
+
+    React.useEffect(() => {
+        fetch("https://63ea74ede0ac9368d6525c20.mockapi.io/shop-items")
+            .then(value => value.json())
+            .then(res => setItems(res))
+    }, [])
     return (
         <div className="App">
             <div className="wrapper">
@@ -19,8 +26,8 @@ function App() {
                         </div>
                         <h2 className="content__title">Все чайники</h2>
                         <div className="content__items">
-                            {items.map((p, i) => {
-                                return <ItemBlock key={i} {...p}/>
+                            {items.map((item, i) => {
+                                return <ItemBlock key={i} {...item}/>
                             })}
                         </div>
                     </div>

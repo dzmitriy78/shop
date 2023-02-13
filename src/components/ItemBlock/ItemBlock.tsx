@@ -1,15 +1,6 @@
 import React, {useState} from 'react';
 
-type ItemBlockPropsType = {
-    title: string
-    price: number
-    imageUrl: string
-    sizes: number[]
-    types: number[]
-    rating: number
-    category: number
-}
-const ItemBlock: React.FC<ItemBlockPropsType> = ({title, price, types, sizes, imageUrl}) => {
+const ItemBlock: React.FC<ItemType> = ({title, price, types, sizes, imageUrl}) => {
     const [itemCount, setItemCount] = useState(0)
     const [activeSize, setActiveSize] = useState(0)
     const [activeType, setActiveType] = useState(0)
@@ -63,4 +54,14 @@ const ItemBlock: React.FC<ItemBlockPropsType> = ({title, price, types, sizes, im
     );
 };
 
-export default ItemBlock;
+export default ItemBlock
+
+export type ItemType = {
+    title: string
+    price: number
+    imageUrl: string
+    sizes: number[]
+    types: number[]
+    rating: number
+    category: number
+}
