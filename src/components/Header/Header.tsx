@@ -1,19 +1,21 @@
 import React from 'react';
 import rootLogo from "./../../assets/img/chaynik.jpg"
+import {Link} from "react-router-dom";
 
 const Header: React.FC = () => {
+
     return (
         <div className="header">
             <div className="container">
                 <div className="header__logo">
-                    <img width="38" src={rootLogo} alt="Pizza logo"/>
+                    <img width="38" src={rootLogo} alt="item logo"/>
                     <div>
                         <h1>kettle</h1>
                         <p>Чайники на любой вкус</p>
                     </div>
                 </div>
                 <div className="header__cart">
-                    <a href="{/*/cart.html*/}" className="button button--cart">
+                    <Link to="/cart" className="button button--cart">
                         <span>520 ₽</span>
                         <div className="button__delimiter"></div>
                         <svg
@@ -46,7 +48,7 @@ const Header: React.FC = () => {
                             />
                         </svg>
                         <span>3</span>
-                    </a>
+                    </Link>
                 </div>
             </div>
         </div>
