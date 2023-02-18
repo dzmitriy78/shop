@@ -1,13 +1,19 @@
 import React from 'react';
 
-const Sort: React.FC = () => {
+const Sort: React.FC<SortPropsType> = ({id, onClickSort}) => {
 
     const [open, setOpen] = React.useState(false)
-    const [sortActive, setSortActive] = React.useState(0)
-    const sortList = ["популярности", "цене", "алфавиту"]
+    const sortList = [
+        "популярности (возр)",
+        "популярности (убыв)",
+        "цене (возр)",
+        "цене (убыв)",
+        "алфавиту (возр)",
+        "алфавиту (убыв)"
+    ]
 
-    const sortHandler = (i: React.SetStateAction<number>) => {
-        setSortActive(i)
+    const sortHandler = (i: number) => {
+        onClickSort(i)
         setOpen(false)
     }
 
@@ -27,14 +33,14 @@ const Sort: React.FC = () => {
                     />
                 </svg>
                 <b>Сортировка по:</b>
-                <span onClick={() => setOpen(!open)}>{sortList[sortActive]}</span>
+                <span onClick={() => setOpen(!open)}>{sortList[id]}</span>
             </div>
             {open && <div className="sort__popup">
                 <ul>
                     {sortList.map((s, i) => <li
                         key={i}
                         onClick={() => sortHandler(i)}
-                        className={i === sortActive ? "active" : ""}>{s}</li>)}
+                        className={i === id ? "active" : ""}>{s}</li>)}
                 </ul>
             </div>}
         </div>
@@ -42,3 +48,8 @@ const Sort: React.FC = () => {
 }
 
 export default Sort;
+
+type SortPropsType = {
+    id: number
+    onClickSort: (i: number) => void
+}
