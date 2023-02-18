@@ -1,8 +1,9 @@
 import React from 'react';
 import rootLogo from "./../../assets/img/chaynik.jpg"
 import {Link} from "react-router-dom";
+import Search from "../Search/Search";
 
-const Header: React.FC = () => {
+const Header: React.FC<HeaderPropsType> = ({changeSearch}) => {
 
     return (
         <div className="header">
@@ -14,6 +15,7 @@ const Header: React.FC = () => {
                         <p>Чайники на любой вкус</p>
                     </div>
                 </div>
+                <Search changeSearch={changeSearch}/>
                 <div className="header__cart">
                     <Link to="/cart" className="button button--cart">
                         <span>520 ₽</span>
@@ -55,4 +57,8 @@ const Header: React.FC = () => {
     )
 }
 
-export default Header;
+export default Header
+
+type HeaderPropsType = {
+    changeSearch?: (value: string) => void
+}
