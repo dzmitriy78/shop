@@ -15,7 +15,6 @@ const Cart: React.FC = () => {
             <Header/>
             <div className="wrapper">
 
-
                 <div className="content">
                     <div className="container container--cart">
                         <div className="cart">

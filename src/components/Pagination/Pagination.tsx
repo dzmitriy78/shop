@@ -3,8 +3,8 @@ import {Paginator, PaginatorPageChangeEvent} from "primereact/paginator";
 
 const Pagination: React.FC<PaginationPropsType> = ({totalItem, setPage}) => {
 
-    const [first, setFirst] = React.useState(1)
-    const [rows, setRows] = React.useState(8)
+    const [first, setFirst] = React.useState<number>(1)
+    const [rows, setRows] = React.useState<number>(8)
 
     const onPageChange = (event: PaginatorPageChangeEvent) => {
         setFirst(event.first)

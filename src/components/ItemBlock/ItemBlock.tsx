@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 
 const ItemBlock: React.FC<ItemType> = ({title, price, types, sizes, imageUrl}) => {
-    const [itemCount, setItemCount] = useState(0)
-    const [activeSize, setActiveSize] = useState(0)
-    const [activeType, setActiveType] = useState(0)
-    const typeNames = ["пластик", "металл"]
+    const [itemCount, setItemCount] = useState<number>(0)
+    const [activeSize, setActiveSize] = useState<number>(0)
+    const [activeType, setActiveType] = useState<number>(0)
+    const typeNames: string[] = ["пластик", "металл"]
 
     const addItemHandler = () => {
         setItemCount((prev) => prev + 1)

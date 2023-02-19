@@ -2,7 +2,7 @@ import React from 'react';
 
 const Categories: React.FC<CategoriesPropsType> = ({id, onClickCategory}) => {
 
-    const categories = ["Все", "Металл", "Эмалированная сталь", "Нержавеющая сталь", "Эмаль", "Алюминий"]
+    const categories: string[] = ["Все", "Металл", "Эмалированная сталь", "Нержавеющая сталь", "Эмаль", "Алюминий"]
 
     return (
         <div className="categories">

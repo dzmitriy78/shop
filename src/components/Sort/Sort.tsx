@@ -2,8 +2,8 @@ import React from 'react';
 
 const Sort: React.FC<SortPropsType> = ({id, onClickSort}) => {
 
-    const [open, setOpen] = React.useState(false)
-    const sortList = [
+    const [open, setOpen] = React.useState<boolean>(false)
+    const sortList: string[] = [
         "популярности (возр)",
         "популярности (убыв)",
         "цене (возр)",

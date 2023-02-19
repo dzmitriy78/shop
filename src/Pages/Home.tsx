@@ -6,16 +6,19 @@ import Skeleton from "../components/ItemBlock/Skeleton";
 import ItemBlock, {ItemType} from "../components/ItemBlock/ItemBlock";
 import axios from "axios";
 import Pagination from "../components/Pagination/Pagination";
+import {SearchContext} from "../App";
 
 const Home: React.FC = () => {
 
+    const {searchValue} = React.useContext(SearchContext)
+
     const [items, setItems] = React.useState<ItemType[]>([])
-    const [isFetching, setIsFetching] = React.useState(false)
-    const [categoryId, setCategoryId] = React.useState(0)
-    const [sortId, setSortId] = React.useState(0)
-    const [searchValue, setSearchValue] = React.useState("")
-    const [page, setPage] = React.useState(1)
-    const [totalItem, setTotalItem] = React.useState(20)
+    const [isFetching, setIsFetching] = React.useState<boolean>(false)
+    const [categoryId, setCategoryId] = React.useState<number>(0)
+    const [sortId, setSortId] = React.useState<number>(0)
+
+    const [page, setPage] = React.useState<number>(1)
+    const [totalItem, setTotalItem] = React.useState<number>(20)
 
 
     React.useEffect(() => {
@@ -47,7 +50,7 @@ const Home: React.FC = () => {
 
     return (
         <div className="wrapper">
-            <Header changeSearch={(value: string) => setSearchValue(value)}/>
+            <Header/>
             <div className="content">
                 <div className="container">
                     <div className="content__top">
