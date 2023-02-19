@@ -9,7 +9,7 @@ import minus from "./../assets/img/minus.svg";
 import './../scss/app.scss';
 
 
-const Cart = () => {
+const Cart: React.FC = () => {
     return (
         <div>
             <Header/>

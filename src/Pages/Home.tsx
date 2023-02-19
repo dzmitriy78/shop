@@ -5,7 +5,7 @@ import Sort from "../components/Sort/Sort";
 import Skeleton from "../components/ItemBlock/Skeleton";
 import ItemBlock, {ItemType} from "../components/ItemBlock/ItemBlock";
 import axios from "axios";
-import { Paginator, PaginatorPageChangeEvent } from 'primereact/paginator';
+import Pagination from "../components/Pagination/Pagination";
 
 const Home: React.FC = () => {
 
@@ -14,14 +14,8 @@ const Home: React.FC = () => {
     const [categoryId, setCategoryId] = React.useState(0)
     const [sortId, setSortId] = React.useState(0)
     const [searchValue, setSearchValue] = React.useState("")
-
-    const [first, setFirst] = React.useState(0);
-    const [rows, setRows] = React.useState(1);
-
-    const onPageChange = (event: PaginatorPageChangeEvent ) => {
-        setFirst(event.first);
-        setRows(event.rows);
-    };
+    const [page, setPage] = React.useState(1)
+    const [totalItem, setTotalItem] = React.useState(20)
 
 
     React.useEffect(() => {
@@ -31,14 +25,25 @@ const Home: React.FC = () => {
         const order = sortId === 0 || sortId === 2 || sortId === 4 ? "asc" : "desc"
         //const search = searchValue? `search=${searchValue}` : ""
 
-        axios.get<ItemType[]>(`https://63ea74ede0ac9368d6525c20.mockapi.io/shop-items?&sortBy=${sort}&category=${category}&order=${order}&page=${first}&limit=${6} `)
+        axios.get<ItemType[]>(`https://63ea74ede0ac9368d6525c20.mockapi.io/shop-items?&sortBy=${sort}&category=${category}&order=${order}&page=${page}&limit=8 `)
             .then(res => res.data)
             .then(data => {
                 setItems(data)
                 setIsFetching(false)
+                //setTotalItem(data.length)
+                //console.log(totalItem)
             })
         window.scrollTo(0, 0)
-    }, [categoryId, sortId, searchValue, first])
+    }, [categoryId, sortId, searchValue, page])
+
+    const changeCategory = (id: number) => {
+        setCategoryId(id)
+        setPage(1)
+    }
+    const changeSort = (id: number) => {
+        setSortId(id)
+        setPage(1)
+    }
 
     return (
         <div className="wrapper">
@@ -47,9 +52,9 @@ const Home: React.FC = () => {
                 <div className="container">
                     <div className="content__top">
                         <Categories id={categoryId}
-                                    onClickCategory={(id: number) => setCategoryId(id)}/>
+                                    onClickCategory={changeCategory}/>
                         <Sort id={sortId}
-                              onClickSort={(id: number) => setSortId(id)}/>
+                              onClickSort={changeSort}/>
                     </div>
                     <h2 className="content__title">Все чайники</h2>
                     {isFetching
@@ -61,9 +66,7 @@ const Home: React.FC = () => {
                                 .map((item, i) => <ItemBlock key={i} {...item}/>)}
                         </div>
                     }
-                    <div className="card">
-                        <Paginator first={first} rows={rows} totalRecords={10} onPageChange={onPageChange}/>
-                    </div>
+                    {items.length >= 8 && <Pagination totalItem={totalItem} setPage={setPage}/>}
                 </div>
             </div>
         </div>
