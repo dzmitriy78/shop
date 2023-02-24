@@ -4,20 +4,18 @@ import cl from "./Search.module.scss"
 import "primeicons/primeicons.css";
 import "primereact/resources/themes/lara-light-purple/theme.css";
 import "primereact/resources/primereact.min.css";
-import {SearchContext} from "../../App";
+import {changeSearch} from "../../redux/slices/filterSlice";
+import {useAppDispatch} from "../../hooks/hooks";
 
 
 const Search: React.FC = () => {
 
-    const {setSearchValue} = React.useContext(SearchContext)
-
+    const dispatch = useAppDispatch()
     const [value, setValue] = React.useState<string>("")
 
     const onSearchHandler = (e: { currentTarget: { value: string; }; }) => {
         setValue(e.currentTarget.value)
-        if (setSearchValue) {
-            setSearchValue(e.currentTarget.value)
-        }
+            dispatch(changeSearch(e.currentTarget.value))
     }
 
     return (

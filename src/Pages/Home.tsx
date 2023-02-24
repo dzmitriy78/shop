@@ -6,23 +6,26 @@ import Skeleton from "../components/ItemBlock/Skeleton";
 import ItemBlock, {ItemType} from "../components/ItemBlock/ItemBlock";
 import axios from "axios";
 import Pagination from "../components/Pagination/Pagination";
-import {SearchContext} from "../App";
+import {changeCategory, changeSort} from "../redux/slices/filterSlice";
+import {changeItems, fetching} from "../redux/slices/appSlice";
+import {useAppDispatch, useAppSelector} from "../hooks/hooks";
 
 const Home: React.FC = () => {
 
-    const {searchValue} = React.useContext(SearchContext)
+    const dispatch = useAppDispatch()
+    const categoryId = useAppSelector(state => state.filter.categoryId)
+    const sortId = useAppSelector(state => state.filter.sortId)
+    const searchValue = useAppSelector(state => state.filter.searchValue)
+    const isFetching = useAppSelector(state => state.app.isFetching)
+    const items = useAppSelector(state => state.app.items)
 
-    const [items, setItems] = React.useState<ItemType[]>([])
-    const [isFetching, setIsFetching] = React.useState<boolean>(false)
-    const [categoryId, setCategoryId] = React.useState<number>(0)
-    const [sortId, setSortId] = React.useState<number>(0)
 
     const [page, setPage] = React.useState<number>(1)
     const [totalItem, setTotalItem] = React.useState<number>(20)
 
 
     React.useEffect(() => {
-        setIsFetching(true)
+        dispatch(fetching(true))
         const sort = sortId < 2 ? "rating" : sortId < 4 ? "price" : "title"
         const category = categoryId !== 0 ? `${categoryId}` : ""
         const order = sortId === 0 || sortId === 2 || sortId === 4 ? "asc" : "desc"
@@ -31,20 +34,18 @@ const Home: React.FC = () => {
         axios.get<ItemType[]>(`https://63ea74ede0ac9368d6525c20.mockapi.io/shop-items?&sortBy=${sort}&category=${category}&order=${order}&page=${page}&limit=8 `)
             .then(res => res.data)
             .then(data => {
-                setItems(data)
-                setIsFetching(false)
-                //setTotalItem(data.length)
-                //console.log(totalItem)
+                dispatch(changeItems(data))
+                dispatch(fetching(false))
             })
         window.scrollTo(0, 0)
-    }, [categoryId, sortId, searchValue, page])
+    }, [categoryId, sortId, searchValue, page, dispatch])
 
-    const changeCategory = (id: number) => {
-        setCategoryId(id)
+    const onChangeCategory = (id: number) => {
+        dispatch(changeCategory(id))
         setPage(1)
     }
-    const changeSort = (id: number) => {
-        setSortId(id)
+    const onChangeSort = (id: number) => {
+        dispatch(changeSort(id))
         setPage(1)
     }
 
@@ -55,9 +56,9 @@ const Home: React.FC = () => {
                 <div className="container">
                     <div className="content__top">
                         <Categories id={categoryId}
-                                    onClickCategory={changeCategory}/>
+                                    onClickCategory={onChangeCategory}/>
                         <Sort id={sortId}
-                              onClickSort={changeSort}/>
+                              onClickSort={onChangeSort}/>
                     </div>
                     <h2 className="content__title">Все чайники</h2>
                     {isFetching
