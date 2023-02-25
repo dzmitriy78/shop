@@ -6,7 +6,7 @@ import Skeleton from "../components/ItemBlock/Skeleton";
 import ItemBlock, {ItemType} from "../components/ItemBlock/ItemBlock";
 import axios from "axios";
 import Pagination from "../components/Pagination/Pagination";
-import {changeCategory, changeSort} from "../redux/slices/filterSlice";
+import {changeCategory, changePage, changeSort} from "../redux/slices/filterSlice";
 import {changeItems, fetching} from "../redux/slices/appSlice";
 import {useAppDispatch, useAppSelector} from "../hooks/hooks";
 
@@ -18,10 +18,7 @@ const Home: React.FC = () => {
     const searchValue = useAppSelector(state => state.filter.searchValue)
     const isFetching = useAppSelector(state => state.app.isFetching)
     const items = useAppSelector(state => state.app.items)
-
-
-    const [page, setPage] = React.useState<number>(1)
-    const [totalItem, setTotalItem] = React.useState<number>(20)
+    const page = useAppSelector(state => state.filter.page)
 
 
     React.useEffect(() => {
@@ -42,11 +39,11 @@ const Home: React.FC = () => {
 
     const onChangeCategory = (id: number) => {
         dispatch(changeCategory(id))
-        setPage(1)
+        dispatch(changePage(1))
     }
     const onChangeSort = (id: number) => {
         dispatch(changeSort(id))
-        setPage(1)
+        dispatch(changePage(1))
     }
 
     return (
@@ -70,7 +67,7 @@ const Home: React.FC = () => {
                                 .map((item, i) => <ItemBlock key={i} {...item}/>)}
                         </div>
                     }
-                    {items.length >= 8 && <Pagination totalItem={totalItem} setPage={setPage}/>}
+                    {items.length >= 8 && <Pagination/>}
                 </div>
             </div>
         </div>

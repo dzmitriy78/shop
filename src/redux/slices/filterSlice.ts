@@ -5,7 +5,9 @@ const filterSlice = createSlice({
     initialState: {
         categoryId: 0,
         sortId: 0,
-        searchValue: ""
+        searchValue: "",
+        page: 1,
+        totalItem: 20
     } as initialStateType,
     reducers: {
         changeCategory: (state, action: PayloadAction<number>) => {
@@ -16,11 +18,14 @@ const filterSlice = createSlice({
         },
         changeSearch: (state, action: PayloadAction<string>) => {
             state.searchValue = action.payload
+        },
+        changePage: (state, action: PayloadAction<number>) => {
+            state.page = action.payload
         }
     }
 })
 
-export const {changeCategory, changeSort, changeSearch} = filterSlice.actions
+export const {changeCategory, changeSort, changeSearch, changePage} = filterSlice.actions
 
 
 export default filterSlice.reducer
@@ -29,4 +34,6 @@ type initialStateType = {
     categoryId: number
     sortId: number
     searchValue: string
+    page: number
+    totalItem: number
 }

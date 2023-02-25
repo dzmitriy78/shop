@@ -6,17 +6,19 @@ import "primereact/resources/themes/lara-light-purple/theme.css";
 import "primereact/resources/primereact.min.css";
 import {changeSearch} from "../../redux/slices/filterSlice";
 import {useAppDispatch} from "../../hooks/hooks";
+import useDebounce from "../../hooks/useDebounce";
+import {useUpdateEffect} from "primereact/hooks";
 
 
 const Search: React.FC = () => {
 
     const dispatch = useAppDispatch()
     const [value, setValue] = React.useState<string>("")
+    const debouncedValue = useDebounce<string>(value, 500)
 
-    const onSearchHandler = (e: { currentTarget: { value: string; }; }) => {
-        setValue(e.currentTarget.value)
-            dispatch(changeSearch(e.currentTarget.value))
-    }
+    useUpdateEffect(() => {
+        dispatch(changeSearch(value))
+    }, [dispatch, debouncedValue])
 
     return (
         <div className={cl.root}>
@@ -26,7 +28,7 @@ const Search: React.FC = () => {
                 <InputText type={"search"}
                            value={value}
                            placeholder={"Найти..."}
-                           onChange={onSearchHandler}/>
+                           onChange={(e) => setValue(e.target.value)}/>
             </span>
             </div>
         </div>
