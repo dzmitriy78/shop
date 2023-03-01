@@ -6,9 +6,11 @@ import Skeleton from "../components/ItemBlock/Skeleton";
 import ItemBlock, {ItemType} from "../components/ItemBlock/ItemBlock";
 import axios from "axios";
 import Pagination from "../components/Pagination/Pagination";
-import {changeCategory, changePage, changeSort} from "../redux/slices/filterSlice";
+import {changeCategory, changePage, changeSort, setFilters} from "../redux/slices/filterSlice";
 import {changeItems, fetching} from "../redux/slices/appSlice";
-import {useAppDispatch, useAppSelector} from "../hooks/hooks";
+import {useAppDispatch, useAppSelector} from "../hooks/reduxHooks";
+import {useNavigate, useParams, useSearchParams} from "react-router-dom";
+import qs from 'qs';
 
 const Home: React.FC = () => {
 
@@ -21,6 +23,22 @@ const Home: React.FC = () => {
     const page = useAppSelector(state => state.filter.page)
 
 
+    const params = useParams()
+    const [searchParams, setSearchParams] = useSearchParams();
+    const navigate = useNavigate()
+
+    React.useEffect(() => {
+        if (searchParams) {
+            const sort = searchParams.get("sortBy")
+            const category = Number(searchParams.get("category"))
+            const page = Number(searchParams.get("page"))
+            const order = searchParams.get("order")
+            const sortValue = sort === "title" ? 4 : sort === "price" ? 2 : 0
+            dispatch(setFilters({sortId: sortValue, categoryId: category, page}))
+            console.log(sort, category, page, order)
+        }
+    }, [])
+
     React.useEffect(() => {
         dispatch(fetching(true))
         const sort = sortId < 2 ? "rating" : sortId < 4 ? "price" : "title"
@@ -28,13 +46,25 @@ const Home: React.FC = () => {
         const order = sortId === 0 || sortId === 2 || sortId === 4 ? "asc" : "desc"
         //const search = searchValue? `search=${searchValue}` : ""
 
-        axios.get<ItemType[]>(`https://63ea74ede0ac9368d6525c20.mockapi.io/shop-items?&sortBy=${sort}&category=${category}&order=${order}&page=${page}&limit=8 `)
+        axios.get<ItemType[]>(`https://63ea74ede0ac9368d6525c20.mockapi.io/shop-items?sortBy=${sort}&category=${category}&order=${order}&page=${page}&limit=8 `)
             .then(res => res.data)
             .then(data => {
                 dispatch(changeItems(data))
+                //dispatch(changeTotalItem(items.length))
                 dispatch(fetching(false))
             })
+        const queryString = qs.stringify({
+            sortBy: sort,
+            category: category,
+            order: order,
+            page: page
+        })
+        navigate(`?${queryString}`)
         window.scrollTo(0, 0)
+    }, [categoryId, sortId, searchValue, page, dispatch, navigate])
+
+    React.useEffect(() => {
+
     }, [categoryId, sortId, searchValue, page, dispatch])
 
     const onChangeCategory = (id: number) => {
@@ -67,7 +97,7 @@ const Home: React.FC = () => {
                                 .map((item, i) => <ItemBlock key={i} {...item}/>)}
                         </div>
                     }
-                    {items.length >= 8 && <Pagination/>}
+                    {<Pagination/>}
                 </div>
             </div>
         </div>

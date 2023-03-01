@@ -21,11 +21,19 @@ const filterSlice = createSlice({
         },
         changePage: (state, action: PayloadAction<number>) => {
             state.page = action.payload
+        },
+        changeTotalItem: (state, action: PayloadAction<number>) => {
+            state.totalItem = action.payload
+        },
+        setFilters: (state, action: PayloadAction<{ sortId: number,categoryId: number, page: number}>) => {
+            state.sortId = action.payload.sortId
+            state.categoryId = action.payload.categoryId
+            state.page = action.payload.page
         }
     }
 })
 
-export const {changeCategory, changeSort, changeSearch, changePage} = filterSlice.actions
+export const {changeCategory, changeSort, changeSearch, changePage, changeTotalItem, setFilters} = filterSlice.actions
 
 
 export default filterSlice.reducer

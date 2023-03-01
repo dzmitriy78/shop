@@ -1,6 +1,6 @@
 import React from 'react';
 import {Paginator, PaginatorPageChangeEvent} from "primereact/paginator";
-import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
+import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
 import {changePage} from "../../redux/slices/filterSlice";
 
 const Pagination: React.FC = () => {

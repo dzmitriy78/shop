@@ -5,7 +5,7 @@ import "primeicons/primeicons.css";
 import "primereact/resources/themes/lara-light-purple/theme.css";
 import "primereact/resources/primereact.min.css";
 import {changeSearch} from "../../redux/slices/filterSlice";
-import {useAppDispatch} from "../../hooks/hooks";
+import {useAppDispatch} from "../../hooks/reduxHooks";
 import useDebounce from "../../hooks/useDebounce";
 import {useUpdateEffect} from "primereact/hooks";
 
