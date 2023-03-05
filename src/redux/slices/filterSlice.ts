@@ -7,7 +7,7 @@ const filterSlice = createSlice({
         sortId: 0,
         searchValue: "",
         page: 1,
-        totalItem: 20
+        totalItem: 20,
     } as initialStateType,
     reducers: {
         changeCategory: (state, action: PayloadAction<number>) => {

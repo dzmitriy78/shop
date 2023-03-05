@@ -9,12 +9,16 @@ import Pagination from "../components/Pagination/Pagination";
 import {changeCategory, changePage, changeSort, setFilters} from "../redux/slices/filterSlice";
 import {changeItems, fetching} from "../redux/slices/appSlice";
 import {useAppDispatch, useAppSelector} from "../hooks/reduxHooks";
-import {useNavigate, useParams, useSearchParams} from "react-router-dom";
+import {useLocation, useNavigate, useSearchParams} from "react-router-dom";
 import qs from 'qs';
 
 const Home: React.FC = () => {
-
+    const location = useLocation()
     const dispatch = useAppDispatch()
+    const [searchParams, setSearchParams] = useSearchParams();
+    const navigate = useNavigate()
+    const isMounted = React.useRef(false)
+    const isSearch = React.useRef(false)
     const categoryId = useAppSelector(state => state.filter.categoryId)
     const sortId = useAppSelector(state => state.filter.sortId)
     const searchValue = useAppSelector(state => state.filter.searchValue)
@@ -22,28 +26,14 @@ const Home: React.FC = () => {
     const items = useAppSelector(state => state.app.items)
     const page = useAppSelector(state => state.filter.page)
 
+    const sort = sortId < 2 ? "rating" : sortId < 4 ? "price" : "title"
+    const category = categoryId !== 0 ? `${categoryId}` : ""
+    const order = sortId === 0 || sortId === 2 || sortId === 4 ? "asc" : "desc"
 
-    const params = useParams()
-    const [searchParams, setSearchParams] = useSearchParams();
-    const navigate = useNavigate()
 
-    React.useEffect(() => {
-        if (searchParams) {
-            const sort = searchParams.get("sortBy")
-            const category = Number(searchParams.get("category"))
-            const page = Number(searchParams.get("page"))
-            const order = searchParams.get("order")
-            const sortValue = sort === "title" ? 4 : sort === "price" ? 2 : 0
-            dispatch(setFilters({sortId: sortValue, categoryId: category, page}))
-            console.log(sort, category, page, order)
-        }
-    }, [])
-
-    React.useEffect(() => {
+    const fetchItems = () => {
         dispatch(fetching(true))
-        const sort = sortId < 2 ? "rating" : sortId < 4 ? "price" : "title"
-        const category = categoryId !== 0 ? `${categoryId}` : ""
-        const order = sortId === 0 || sortId === 2 || sortId === 4 ? "asc" : "desc"
+
         //const search = searchValue? `search=${searchValue}` : ""
 
         axios.get<ItemType[]>(`https://63ea74ede0ac9368d6525c20.mockapi.io/shop-items?sortBy=${sort}&category=${category}&order=${order}&page=${page}&limit=8 `)
@@ -53,19 +43,62 @@ const Home: React.FC = () => {
                 //dispatch(changeTotalItem(items.length))
                 dispatch(fetching(false))
             })
-        const queryString = qs.stringify({
-            sortBy: sort,
-            category: category,
-            order: order,
-            page: page
-        })
-        navigate(`?${queryString}`)
-        window.scrollTo(0, 0)
-    }, [categoryId, sortId, searchValue, page, dispatch, navigate])
+    }
 
     React.useEffect(() => {
+        window.scrollTo(0, 0)
+        if (!isSearch.current) {
+            fetchItems()
+        }
+        isSearch.current = false
+    }, [category, sort, page, order])
 
-    }, [categoryId, sortId, searchValue, page, dispatch])
+    React.useEffect(() => {
+        if (isMounted.current) {
+            const queryString = qs.stringify({
+                sortBy: sort,
+                category,
+                order,
+                page
+            }, {addQueryPrefix: true})
+            navigate(`${queryString}`)
+        }
+        isMounted.current = true
+    }, [category, sort, page, order, navigate])
+
+    React.useEffect(() => {
+        let sortValue = null as unknown as number;
+        if (location.search) {
+            const sort = searchParams.get("sortBy")
+            const category = Number(searchParams.get("category"))
+            const page = Number(searchParams.get("page"))
+            const order = searchParams.get("order")
+
+
+            if (sort === "title") {
+                if (order === "asc") {
+                    sortValue = 4
+                }
+                sortValue = 5
+            } else if (sort === "price") {
+                if (order === "asc") {
+                    sortValue = 2
+                }
+                sortValue = 3
+            } else if (sort === "rating") {
+                if (order === "asc") {
+                    sortValue = 0
+                }
+                sortValue = 1
+            }
+            //? 4 : sort === "price" ? 2 : 0
+            dispatch(setFilters({sortId: sortValue, categoryId: category, page}))
+            console.log(sort, sortValue, sortId, category, page, order)
+            isSearch.current = true
+
+        }
+    }, [])
+
 
     const onChangeCategory = (id: number) => {
         dispatch(changeCategory(id))
