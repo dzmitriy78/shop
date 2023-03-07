@@ -3,6 +3,7 @@ import React from 'react';
 const Sort: React.FC<SortPropsType> = ({id, onClickSort}) => {
 
     const [open, setOpen] = React.useState<boolean>(false)
+    const sortRef = React.useRef<HTMLDivElement>(null)
     const sortList: string[] = [
         "популярности (возр)",
         "популярности (убыв)",
@@ -16,9 +17,18 @@ const Sort: React.FC<SortPropsType> = ({id, onClickSort}) => {
         onClickSort(i)
         setOpen(false)
     }
+    React.useEffect(() => {
+        const outsideClickHandler = (e: any) => {
+            if (!e.composedPath().includes(sortRef.current)) {
+                setOpen(false)
+            }
+        }
+        document.body.addEventListener("click", outsideClickHandler)
+        return () => document.body.removeEventListener("click", outsideClickHandler)
+    }, [])
 
     return (
-        <div className="sort">
+        <div ref={sortRef} className="sort">
             <div className="sort__label">
                 <svg
                     width="10"

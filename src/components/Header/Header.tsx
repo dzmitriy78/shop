@@ -2,8 +2,12 @@ import React from 'react';
 import rootLogo from "./../../assets/img/chaynik.jpg"
 import {Link} from "react-router-dom";
 import Search from "../Search/Search";
+import {useAppSelector} from "../../hooks/reduxHooks";
 
 const Header: React.FC = () => {
+
+    const totalPrice = useAppSelector(state => state.cart.totalPrice)
+    const items = useAppSelector(state => state.cart.items)
 
     return (
         <div className="header">
@@ -18,7 +22,7 @@ const Header: React.FC = () => {
                 <Search />
                 <div className="header__cart">
                     <Link to="/cart" className="button button--cart">
-                        <span>520 ₽</span>
+                        <span>{totalPrice} BYN</span>
                         <div className="button__delimiter"></div>
                         <svg
                             width="18"
@@ -49,7 +53,7 @@ const Header: React.FC = () => {
                                 strokeLinejoin="round"
                             />
                         </svg>
-                        <span>3</span>
+                        <span>{items.length}</span>
                     </Link>
                 </div>
             </div>

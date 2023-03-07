@@ -1,13 +1,26 @@
 import React, {useState} from 'react';
+import {useAppDispatch} from "../../hooks/reduxHooks";
+import {addItem} from "../../redux/slices/cartSlice";
 
-const ItemBlock: React.FC<ItemType> = ({title, price, types, sizes, imageUrl}) => {
-    const [itemCount, setItemCount] = useState<number>(0)
+const ItemBlock: React.FC<ItemType> = ({id, title, price, types, sizes, imageUrl}) => {
+    const [itemCount] = useState<number>(0)
     const [activeSize, setActiveSize] = useState<number>(0)
     const [activeType, setActiveType] = useState<number>(0)
+    const dispatch = useAppDispatch()
     const typeNames: string[] = ["пластик", "металл"]
 
     const addItemHandler = () => {
-        setItemCount((prev) => prev + 1)
+        //setItemCount((prev) => prev + 1)
+        const item = {
+            id,
+            title,
+            price,
+            imageUrl,
+            type: typeNames[activeType],
+            size: activeSize,
+            count: 1
+        }
+        dispatch(addItem(item))
     }
 
     return (
@@ -66,4 +79,5 @@ export type ItemType = {
     types: number[]
     rating: number
     category: number
+    id: number
 }
