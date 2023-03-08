@@ -1,12 +1,13 @@
 import React, {useState} from 'react';
-import {useAppDispatch} from "../../hooks/reduxHooks";
+import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
 import {addItem} from "../../redux/slices/cartSlice";
 
 const ItemBlock: React.FC<ItemType> = ({id, title, price, types, sizes, imageUrl}) => {
-    const [itemCount] = useState<number>(0)
+    //const [itemCount] = useState<number>(0)
     const [activeSize, setActiveSize] = useState<number>(0)
     const [activeType, setActiveType] = useState<number>(0)
     const dispatch = useAppDispatch()
+    const itemCount = useAppSelector(state => state.cart.items.find(item => item.id === id)?.count)
     const typeNames: string[] = ["пластик", "металл"]
 
     const addItemHandler = () => {
@@ -17,7 +18,7 @@ const ItemBlock: React.FC<ItemType> = ({id, title, price, types, sizes, imageUrl
             price,
             imageUrl,
             type: typeNames[activeType],
-            size: activeSize,
+            size: sizes[activeSize],
             count: 1
         }
         dispatch(addItem(item))
@@ -61,7 +62,7 @@ const ItemBlock: React.FC<ItemType> = ({id, title, price, types, sizes, imageUrl
                             />
                         </svg>
                         <span>Добавить</span>
-                        <i>{itemCount}</i>
+                        {itemCount && <i>{itemCount}</i>}
                     </button>
                 </div>
             </div>

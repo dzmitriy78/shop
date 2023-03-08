@@ -7,25 +7,7 @@ const cartSlice = createSlice({
         items: []
     } as InitialStateType,
     reducers: {
-        /*        addItem: (state, action: PayloadAction<CartItemType>) => {
-                    state.items.push(action.payload)
-                    state.totalPrice = state.items.reduce((sum, i) => {
-                        return i.price + sum
-                    }, 0)
-                },*/
         addItem: (state, action: PayloadAction<{ id: number, size: number, type: string }>) => {
-            /*const findItem = state.items.find(i=>i.id === action.payload.id)
-             /* if (findItem){
-                    findItem.count++
-                } else {
-                    state.items.push({
-                        ...action.payload,
-                        count: 1
-                    })
-                }
-                state.totalPrice = state.items.reduce((sum, i) => {
-                    return i.price + sum
-                }, 0)*/
             const findItem = state.items.find(obj => {
                 return ((obj.id === action.payload.id) &&
                     (obj.size === action.payload.size) &&
@@ -50,7 +32,6 @@ const cartSlice = createSlice({
                 state.totalPrice -= findItem.price;
         },
         removeItem: (state, action: PayloadAction<{ id: number, size: number, type: string }>) => {
-            //state.items.filter((i: { id: number; }) => i.id !== action.payload.id)
             const findItem = state.items.find(obj => {
                 return ((obj.id === action.payload.id) &&
                     (obj.size === action.payload.size) &&
@@ -72,7 +53,6 @@ const cartSlice = createSlice({
 })
 
 export const {addItem, removeItem, clearCart, minusItem} = cartSlice.actions
-
 
 export default cartSlice.reducer
 

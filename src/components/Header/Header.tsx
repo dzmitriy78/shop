@@ -8,6 +8,7 @@ const Header: React.FC = () => {
 
     const totalPrice = useAppSelector(state => state.cart.totalPrice)
     const items = useAppSelector(state => state.cart.items)
+    const itemCount = items.reduce((sum, item) => sum + item.count, 0)
 
     return (
         <div className="header">
@@ -19,7 +20,7 @@ const Header: React.FC = () => {
                         <p>Чайники на любой вкус</p>
                     </div>
                 </div>
-                <Search />
+                <Search/>
                 <div className="header__cart">
                     <Link to="/cart" className="button button--cart">
                         <span>{totalPrice} BYN</span>
@@ -53,7 +54,7 @@ const Header: React.FC = () => {
                                 strokeLinejoin="round"
                             />
                         </svg>
-                        <span>{items.length}</span>
+                        <span>{itemCount}</span>
                     </Link>
                 </div>
             </div>

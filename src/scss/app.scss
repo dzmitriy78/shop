@@ -325,6 +325,11 @@ body {
       top: 2px;
     }
 
+    .icon::before {
+      content: '😕';
+      font-style: normal;
+    }
+
     img {
       display: block;
       width: 300px;
