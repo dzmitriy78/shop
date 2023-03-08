@@ -73,8 +73,12 @@ const Cart: React.FC = () => {
                                     <span onClick={onClearCart}>Очистить корзину</span>
                                 </div>
                             </div>
-                            <CartItem/>
                         </div>
+                        {
+                            cartItems.map((item, i) => <div key={i + item.title}>
+                                <CartItem item={item}/>
+                            </div>)
+                        }
                         <div className="cart__bottom">
                             <div className="cart__bottom-details">
                                 <span> Всего товаров: <b>{itemCount} шт.</b> </span>

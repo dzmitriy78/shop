@@ -60,7 +60,7 @@ type InitialStateType = {
     totalPrice: number,
     items: CartItemType[]
 }
-type CartItemType = {
+export type CartItemType = {
     id: number
     title: string
     price: number
