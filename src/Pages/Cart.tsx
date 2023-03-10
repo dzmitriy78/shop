@@ -5,7 +5,7 @@ import trash from "./../assets/img/trash.svg";
 import cart from "./../assets/img/cart.svg";
 import './../scss/app.scss';
 import {useAppDispatch, useAppSelector} from "../hooks/reduxHooks";
-import {clearCart} from "../redux/slices/cartSlice";
+import {clearCart, selectCartItems, selectTotalPrice} from "../redux/slices/cartSlice";
 import CartEmpty from "./CartEmpty";
 import CartItem from "./CartItem";
 
@@ -13,12 +13,9 @@ import CartItem from "./CartItem";
 const Cart: React.FC = () => {
 
     const dispatch = useAppDispatch()
-    const cartItems = useAppSelector(state => state.cart.items)
-    const totalPrice = useAppSelector(state => state.cart.totalPrice)
+    const cartItems = useAppSelector(selectCartItems)
+    const totalPrice = useAppSelector(selectTotalPrice)
     const itemCount = cartItems.reduce((sum, item) => sum + item.count, 0)
-    /* const cartItems = useAppSelector((state) =>
-         state.cart.items.filter((obj) => obj.id === id);
-     const addedCount = cartItems.reduce((sum, item) => sum + item.count, 0);*/
 
     let onClearCart = () => {
         if (window.confirm("Вы действительно хотите удалить все товары?"))

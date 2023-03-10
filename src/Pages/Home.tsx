@@ -6,7 +6,7 @@ import Skeleton from "../components/ItemBlock/Skeleton";
 import ItemBlock from "../components/ItemBlock/ItemBlock";
 import Pagination from "../components/Pagination/Pagination";
 import {changeCategory, changePage, changeSort, setFilters} from "../redux/slices/filterSlice";
-import {getItems} from "../redux/slices/appSlice";
+import {getItems, selectItems} from "../redux/slices/appSlice";
 import {useAppDispatch, useAppSelector} from "../hooks/reduxHooks";
 import {useLocation, useNavigate, useSearchParams} from "react-router-dom";
 import qs from 'qs';
@@ -23,7 +23,7 @@ const Home: React.FC = () => {
     const sortId = useAppSelector(state => state.filter.sortId)
     const searchValue = useAppSelector(state => state.filter.searchValue)
     const isFetching = useAppSelector(state => state.app.isFetching)
-    const items = useAppSelector(state => state.app.items)
+    const items = useAppSelector(selectItems)
     const page = useAppSelector(state => state.filter.page)
 
     const sort = sortId < 2 ? "rating" : sortId < 4 ? "price" : "title"
@@ -33,6 +33,7 @@ const Home: React.FC = () => {
     React.useEffect(() => {
         if (!isSearch.current) {
             dispatch(getItems({sort, category, order, page}))
+            //dispatch(setItems(items))
         }
         window.scrollTo(0, 0)
         isSearch.current = false

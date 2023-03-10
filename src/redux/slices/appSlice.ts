@@ -21,6 +21,9 @@ const appSlice = createSlice({
     reducers: {
         fetching: (state, action: PayloadAction<{ isFetching: "idle" | "loading" | "success" | "error" }>) => {
             state.isFetching = action.payload.isFetching
+        },
+        setItems: (state, action) => {
+            state.items = action.payload.items
         }
     },
     extraReducers: builder => {
@@ -39,7 +42,9 @@ const appSlice = createSlice({
     }
 })
 
-export const {fetching} = appSlice.actions
+export const selectItems = (state: { app: { items: ItemType[] }; }) => state.app.items
+
+export const {fetching, setItems} = appSlice.actions
 
 
 export default appSlice.reducer

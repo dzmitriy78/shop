@@ -3,12 +3,13 @@ import rootLogo from "./../../assets/img/chaynik.jpg"
 import {Link} from "react-router-dom";
 import Search from "../Search/Search";
 import {useAppSelector} from "../../hooks/reduxHooks";
+import {selectCartItems, selectTotalPrice} from "../../redux/slices/cartSlice";
 
 const Header: React.FC = () => {
 
-    const totalPrice = useAppSelector(state => state.cart.totalPrice)
-    const items = useAppSelector(state => state.cart.items)
-    const itemCount = items.reduce((sum, item) => sum + item.count, 0)
+    const totalPrice = useAppSelector(selectTotalPrice)
+    const cartItems = useAppSelector(selectCartItems)
+    const itemCount = cartItems.reduce((sum, item) => sum + item.count, 0)
 
     return (
         <div className="header">

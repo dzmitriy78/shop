@@ -54,6 +54,9 @@ const cartSlice = createSlice({
 
 export const {addItem, removeItem, clearCart, minusItem} = cartSlice.actions
 
+export const selectCartItems = (state: { cart: { items: CartItemType[] } }) => state.cart.items
+export const selectTotalPrice = (state: { cart: { totalPrice: number } }) => state.cart.totalPrice
+
 export default cartSlice.reducer
 
 type InitialStateType = {

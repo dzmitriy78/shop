@@ -2,16 +2,23 @@ import React, {useState} from 'react';
 import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
 import {addItem} from "../../redux/slices/cartSlice";
 
-const ItemBlock: React.FC<ItemType> = ({id, title, price, types, sizes, imageUrl}) => {
-    //const [itemCount] = useState<number>(0)
+const ItemBlock: React.FC<ItemType> = ({
+                                           id,
+                                           title,
+                                           price,
+                                           types,
+                                           sizes,
+                                           imageUrl
+                                       }) => {
+
     const [activeSize, setActiveSize] = useState<number>(0)
     const [activeType, setActiveType] = useState<number>(0)
     const dispatch = useAppDispatch()
-    const itemCount = useAppSelector(state => state.cart.items.find(item => item.id === id)?.count)
+    const cartItems = useAppSelector((state) => state.cart.items.filter((obj) => obj.id === id))
+    const addedCount = cartItems.reduce((sum, item) => sum + item.count, 0);
     const typeNames: string[] = ["пластик", "металл"]
 
     const addItemHandler = () => {
-        //setItemCount((prev) => prev + 1)
         const item = {
             id,
             title,
@@ -62,13 +69,13 @@ const ItemBlock: React.FC<ItemType> = ({id, title, price, types, sizes, imageUrl
                             />
                         </svg>
                         <span>Добавить</span>
-                        {itemCount && <i>{itemCount}</i>}
+                        {addedCount > 0 && <i>{addedCount}</i>}
                     </button>
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
 export default ItemBlock
 
