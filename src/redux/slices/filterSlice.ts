@@ -4,7 +4,7 @@ const filterSlice = createSlice({
     name: "filter",
     initialState: {
         categoryId: 0,
-        sortId: 0,
+        sortId: 1,
         searchValue: "",
         page: 1,
         totalItem: 20,

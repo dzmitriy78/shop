@@ -8,8 +8,8 @@ import {selectCartItems, selectTotalPrice} from "../../redux/slices/cartSlice";
 const Header: React.FC = () => {
 
     const totalPrice = useAppSelector(selectTotalPrice)
-    const cartItems = useAppSelector(selectCartItems)
-    const itemCount = cartItems.reduce((sum, item) => sum + item.count, 0)
+    const cartItemsCount = useAppSelector(selectCartItems)
+        .reduce((sum, item) => sum + item.count, 0)
 
     return (
         <div className="header">
@@ -55,7 +55,7 @@ const Header: React.FC = () => {
                                 strokeLinejoin="round"
                             />
                         </svg>
-                        <span>{itemCount}</span>
+                        <span>{cartItemsCount}</span>
                     </Link>
                 </div>
             </div>
