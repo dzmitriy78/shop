@@ -1,6 +1,6 @@
 import React from 'react';
 import rootLogo from "./../../assets/img/chaynik.jpg"
-import {Link} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import Search from "../Search/Search";
 import {useAppSelector} from "../../hooks/reduxHooks";
 import {selectCartItems, selectTotalPrice} from "../../redux/slices/cartSlice";
@@ -10,6 +10,7 @@ const Header: React.FC = () => {
     const totalPrice = useAppSelector(selectTotalPrice)
     const cartItemsCount = useAppSelector(selectCartItems)
         .reduce((sum, item) => sum + item.count, 0)
+    const location = useLocation()
 
     return (
         <div className="header">
@@ -21,9 +22,9 @@ const Header: React.FC = () => {
                         <p>Чайники на любой вкус</p>
                     </div>
                 </div>
-                <Search/>
+                {location.pathname === "/" && <Search/>}
                 <div className="header__cart">
-                    <Link to="/cart" className="button button--cart">
+                    {location.pathname !== "/cart" && <Link to="/cart" className="button button--cart">
                         <span>{totalPrice} BYN</span>
                         <div className="button__delimiter"></div>
                         <svg
@@ -56,7 +57,7 @@ const Header: React.FC = () => {
                             />
                         </svg>
                         <span>{cartItemsCount}</span>
-                    </Link>
+                    </Link>}
                 </div>
             </div>
         </div>

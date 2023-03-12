@@ -9,15 +9,15 @@ import './../scss/app.scss';
 const CartItem: React.FC<{ item: CartItemType }> = ({item}) => {
     const dispatch = useAppDispatch()
 
-    const onRemoveHandler = (id: number, size: number, type: string) => {
+    const onRemoveHandler = (id: string, size: number, type: string) => {
         if (window.confirm("Вы действительно хотите удалить этот товар?"))
             dispatch(removeItem({id, size, type}))
     }
-    const onMinusItemHandler = (id: number, size: number, type: string) => {
+    const onMinusItemHandler = (id: string, size: number, type: string) => {
         dispatch(minusItem({id, size, type}))
     }
-    const onPlusItemHandler = (id: number, size: number, type: string) => {
-        dispatch(addItem({id, size, type}))
+    const onPlusItemHandler = (id: string, title: string, price: number, imageUrl: string, type: string, size: number, count: number) => {
+        dispatch(addItem({id, title, price, imageUrl, type, size, count}))
     }
 
     return (
@@ -43,7 +43,7 @@ const CartItem: React.FC<{ item: CartItemType }> = ({item}) => {
                 </div>
                 <b>{item.count}</b>
                 <div className="button button--outline button--circle cart__item-count-plus"
-                     onClick={() => onPlusItemHandler(item.id, item.size, item.type)}>
+                     onClick={() => onPlusItemHandler(item.id, item.title,  item.price,  item.imageUrl,  item.type, item.size, item.count)}>
                     <img src={plus} alt={"plus"}/>
                 </div>
             </div>

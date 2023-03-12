@@ -28,7 +28,7 @@ const Search: React.FC = () => {
                 <InputText type={"search"}
                            value={value}
                            placeholder={"Найти..."}
-                           onChange={(e) => setValue(e.target.value)}/>
+                           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value)}/>
             </span>
             </div>
         </div>

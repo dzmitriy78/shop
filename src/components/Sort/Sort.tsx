@@ -18,8 +18,8 @@ const Sort: React.FC<SortPropsType> = ({id, onClickSort}) => {
         setOpen(false)
     }
     React.useEffect(() => {
-        const outsideClickHandler = (e: any) => {
-            if (!e.composedPath().includes(sortRef.current)) {
+        const outsideClickHandler = (e: MouseEvent) => {
+            if (sortRef.current && !e.composedPath().includes(sortRef.current)) {
                 setOpen(false)
             }
         }

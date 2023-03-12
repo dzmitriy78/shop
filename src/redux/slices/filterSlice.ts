@@ -25,10 +25,11 @@ const filterSlice = createSlice({
         changeTotalItem: (state, action: PayloadAction<number>) => {
             state.totalItem = action.payload
         },
-        setFilters: (state, action: PayloadAction<{ sortId: number,categoryId: number, page: number}>) => {
+        setFilters: (state, action: PayloadAction<initialStateType>) => {
             state.sortId = action.payload.sortId
             state.categoryId = action.payload.categoryId
             state.page = action.payload.page
+            state.searchValue = action.payload.searchValue
         }
     }
 })
@@ -43,5 +44,5 @@ type initialStateType = {
     sortId: number
     searchValue: string
     page: number
-    totalItem: number
+    totalItem?: number
 }

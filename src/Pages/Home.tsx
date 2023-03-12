@@ -1,12 +1,11 @@
 import React from 'react';
-import Header from "../components/Header/Header";
 import Categories from "../components/Categories/Categories";
 import Sort from "../components/Sort/Sort";
 import Skeleton from "../components/ItemBlock/Skeleton";
 import ItemBlock from "../components/ItemBlock/ItemBlock";
 import Pagination from "../components/Pagination/Pagination";
-import {changeCategory, changeSort, setFilters} from "../redux/slices/filterSlice";
-import {getItems, selectItems} from "../redux/slices/appSlice";
+import {changeCategory, changePage, changeSort, setFilters} from "../redux/slices/filterSlice";
+import {getItems, selectItems, Status} from "../redux/slices/appSlice";
 import {useAppDispatch, useAppSelector} from "../hooks/reduxHooks";
 import {useLocation, useNavigate, useSearchParams} from "react-router-dom";
 import qs from 'qs';
@@ -50,7 +49,7 @@ const Home: React.FC = () => {
                 sortValue = order === "asc" ? 0 : 1
             }
             //? 4 : sort === "price" ? 2 : 0
-            dispatch(setFilters({sortId: sortValue, categoryId: category, page}))
+            dispatch(setFilters({categoryId: category, sortId: sortValue, searchValue, page}))
         }
     }, [])
 
@@ -71,16 +70,16 @@ const Home: React.FC = () => {
     }, [categoryId, sortId, page, order, navigate])
     const onChangeCategory = (id: number) => {
         dispatch(changeCategory(id))
-        //dispatch(changePage(1))
+        dispatch(changePage(1))
     }
     const onChangeSort = (id: number) => {
         dispatch(changeSort(id))
-        //dispatch(changePage(1))
+        dispatch(changePage(1))
     }
 
     return (
         <div className="wrapper">
-            <Header/>
+
             <div className="content">
                 <div className="container">
                     <div className="content__top">
@@ -90,14 +89,14 @@ const Home: React.FC = () => {
                               onClickSort={onChangeSort}/>
                     </div>
                     <h2 className="content__title">Все чайники</h2>
-                    {isFetching === "loading"
+                    {isFetching === Status.LOADING
                         ? <div className="content__items">
                             {[...new Array(9)].map((_, i) => <Skeleton key={i}/>)}
                         </div>
-                        : isFetching === "success"
+                        : isFetching === Status.SUCCESS
                             ? <div className="content__items">
                                 {items.filter((i) => i.title.toLowerCase().includes(searchValue.toLowerCase()))
-                                    .map((item, i) => <ItemBlock key={i} {...item}/>)}
+                                    .map((item) => <ItemBlock {...item} key={item.id}/>)}
                             </div>
                             : <div className={"content__error-info"}>
                                 <h2>Возникла непредвиденная ошибка!</h2>
@@ -110,4 +109,4 @@ const Home: React.FC = () => {
         </div>
     )
 }
-export default Home;
+export default Home

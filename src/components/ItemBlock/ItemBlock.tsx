@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
-import {addItem} from "../../redux/slices/cartSlice";
+import {addItem, CartItemType} from "../../redux/slices/cartSlice";
+import {Link} from "react-router-dom";
 
 const ItemBlock: React.FC<ItemType> = ({
                                            id,
@@ -19,14 +20,14 @@ const ItemBlock: React.FC<ItemType> = ({
     const typeNames: string[] = ["пластик", "металл"]
 
     const addItemHandler = () => {
-        const item = {
+        const item: CartItemType = {
             id,
             title,
             price,
             imageUrl,
             type: typeNames[activeType],
             size: sizes[activeSize],
-            count: 1
+            count: 0
         }
         dispatch(addItem(item))
     }
@@ -34,12 +35,13 @@ const ItemBlock: React.FC<ItemType> = ({
     return (
         <div className="pizza-block-wrapper">
             <div className="pizza-block">
-                <img
-                    className="pizza-block__image"
-                    src={imageUrl}
-                    alt="KETTLE"
-                />
-                <h4 className="pizza-block__title">{title}</h4>
+                <Link to={`/fullItem/${id}`}>
+                    <img className="pizza-block__image"
+                         src={imageUrl}
+                         alt="KETTLE"
+                    />
+                    <h4 className="pizza-block__title">{title}</h4>
+                </Link>
                 <div className="pizza-block__selector">
                     <ul>Материал <br/>ручки:
                         {types.map((t, i) => <li key={i}
@@ -87,5 +89,5 @@ export type ItemType = {
     types: number[]
     rating: number
     category: number
-    id: number
+    id: string
 }
