@@ -10,19 +10,19 @@ import useDebounce from "../../hooks/useDebounce";
 import {useUpdateEffect} from "primereact/hooks";
 
 
-const Search: React.FC = () => {
+const Search: React.FC = React.memo(() => {
 
-    const dispatch = useAppDispatch()
-    const [value, setValue] = React.useState<string>("")
-    const debouncedValue = useDebounce<string>(value, 500)
+        const dispatch = useAppDispatch()
+        const [value, setValue] = React.useState<string>("")
+        const debouncedValue = useDebounce<string>(value, 500)
 
-    useUpdateEffect(() => {
-        dispatch(changeSearch(value))
-    }, [dispatch, debouncedValue])
+        useUpdateEffect(() => {
+            dispatch(changeSearch(value))
+        }, [dispatch, debouncedValue])
 
-    return (
-        <div className={cl.root}>
-            <div className="card flex flex-wrap justify-content-center gap-3">
+        return (
+            <div className={cl.root}>
+                <div className="card flex flex-wrap justify-content-center gap-3">
             <span className="p-input-icon-left">
                 <i className="pi pi-search"/>
                 <InputText type={"search"}
@@ -30,9 +30,9 @@ const Search: React.FC = () => {
                            placeholder={"Найти..."}
                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value)}/>
             </span>
+                </div>
             </div>
-        </div>
-    )
-}
-
+        )
+    }
+)
 export default Search

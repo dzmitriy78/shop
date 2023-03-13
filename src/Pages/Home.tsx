@@ -68,14 +68,14 @@ const Home: React.FC = () => {
         isMounted.current = true
 
     }, [categoryId, sortId, page, order, navigate])
-    const onChangeCategory = (id: number) => {
+    const onChangeCategory = React.useCallback((id: number) => {
         dispatch(changeCategory(id))
         dispatch(changePage(1))
-    }
-    const onChangeSort = (id: number) => {
+    },[dispatch])
+    const onChangeSort = React.useCallback((id: number) => {
         dispatch(changeSort(id))
         dispatch(changePage(1))
-    }
+    },[dispatch])
 
     return (
         <div className="wrapper">

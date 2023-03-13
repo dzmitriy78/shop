@@ -201,6 +201,23 @@ body {
             display: none;
           }
         }
+
+        &:disabled {
+          opacity: 0.4;
+          border-color: #7b7b7b;
+
+          &:active {
+            transform: none;
+          }
+
+          &:hover {
+            background-color: transparent;
+          }
+
+          svg-path {
+            fill: #7b7b7b;
+          }
+        }
       }
 
       b {
@@ -267,7 +284,7 @@ body {
 
         &:last-of-type {
           b {
-            color: $orange;
+            color: $violet;
           }
         }
       }

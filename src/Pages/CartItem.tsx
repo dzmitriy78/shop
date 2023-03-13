@@ -34,13 +34,11 @@ const CartItem: React.FC<{ item: CartItemType }> = ({item}) => {
                 <p>{item.type}, {item.size} л.</p>
             </div>
             <div className="cart__item-count">
-                <div
+                <button disabled={item.count === 1 }
                     className="button button--outline button--circle cart__item-count-minus"
-                    onClick={item.count === 1 ?
-                        () => onRemoveHandler(item.id, item.size, item.type)
-                        : () => onMinusItemHandler(item.id, item.size, item.type)}>
+                    onClick= {() => onMinusItemHandler(item.id, item.size, item.type)}>
                     <img src={minus} alt={"minus"}/>
-                </div>
+                </button>
                 <b>{item.count}</b>
                 <div className="button button--outline button--circle cart__item-count-plus"
                      onClick={() => onPlusItemHandler(item.id, item.title,  item.price,  item.imageUrl,  item.type, item.size, item.count)}>
