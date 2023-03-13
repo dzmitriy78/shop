@@ -5,12 +5,12 @@ const Sort: React.FC<SortPropsType> = React.memo(({id, onClickSort}) => {
         const [open, setOpen] = React.useState<boolean>(false)
         const sortRef = React.useRef<HTMLDivElement>(null)
         const sortList: string[] = [
-            "популярности (возр)",
-            "популярности (убыв)",
-            "цене (возр)",
-            "цене (убыв)",
-            "алфавиту (возр)",
-            "алфавиту (убыв)"
+            "пoпулярности",
+            "популярности",
+            "цeне",
+            "цене",
+            "aлфавиту",
+            "алфавиту"
         ]
 
         const sortHandler = (i: number) => {
@@ -43,14 +43,26 @@ const Sort: React.FC<SortPropsType> = React.memo(({id, onClickSort}) => {
                         />
                     </svg>
                     <b>Сортировка по:</b>
-                    <span onClick={() => setOpen(!open)}>{sortList[id]}</span>
+                    <span onClick={() => setOpen(!open)}>
+                        {sortList[id]}
+                        {(sortList[id] === sortList[0] || sortList[id] === sortList[2] || sortList[id] === sortList[4])
+                            ? <i className="pi pi-arrow-up"></i>
+                            : <i className="pi pi-arrow-down"></i>
+                        }
+                    </span>
                 </div>
                 {open && <div className="sort__popup">
                     <ul>
                         {sortList.map((s, i) => <li
                             key={i}
                             onClick={() => sortHandler(i)}
-                            className={i === id ? "active" : ""}>{s}</li>)}
+                            className={i === id ? "active" : ""}>
+                            {s}
+                            {i === 0 || i === 2 || i === 4
+                                ? <i className="pi pi-arrow-up"></i>
+                                : <i className="pi pi-arrow-down"></i>}
+                        </li>)
+                        }
                     </ul>
                 </div>}
             </div>
