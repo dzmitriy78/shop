@@ -1,7 +1,8 @@
 import React from 'react';
-import {useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 import {ItemType} from "../ItemBlock/ItemBlock";
+import {ProgressSpinner} from "primereact/progressspinner";
 
 const FullItem: React.FC = () => {
 
@@ -25,7 +26,9 @@ const FullItem: React.FC = () => {
     if (!item) {
         return (
             <div>
-                <h2>Загрузка...</h2>
+                <div className="card flex justify-content-center">
+                    <ProgressSpinner/>
+                </div>
             </div>
         )
     }
@@ -35,7 +38,12 @@ const FullItem: React.FC = () => {
             <img src={item.imageUrl} alt={"fullItem"}/>
             {/* <h2>{item.types}</h2>
             <h2>{item.sizes}</h2>*/}
-            <h1>{item.price} BYN</h1>
+            <h1>Цена: {item.price} BYN</h1>
+            <div className="content">
+                <Link to={"/"} className="button button">
+                    <i className="pi pi-arrow-left"> Вернуться к покупкам</i>
+                </Link>
+            </div>
         </div>
     )
 }

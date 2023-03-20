@@ -11,6 +11,7 @@ import {useLocation, useNavigate, useSearchParams} from "react-router-dom";
 import qs from 'qs';
 
 const Home: React.FC = () => {
+
     const location = useLocation()
     const dispatch = useAppDispatch()
     const [searchParams] = useSearchParams();
@@ -71,11 +72,11 @@ const Home: React.FC = () => {
     const onChangeCategory = React.useCallback((id: number) => {
         dispatch(changeCategory(id))
         dispatch(changePage(1))
-    },[dispatch])
+    }, [dispatch])
     const onChangeSort = React.useCallback((id: number) => {
         dispatch(changeSort(id))
         dispatch(changePage(1))
-    },[dispatch])
+    }, [dispatch])
 
     return (
         <div className="wrapper">

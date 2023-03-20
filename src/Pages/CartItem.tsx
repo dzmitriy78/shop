@@ -5,6 +5,7 @@ import trash from "../assets/img/trash.svg";
 import {addItem, CartItemType, minusItem, removeItem} from "../redux/slices/cartSlice";
 import {useAppDispatch} from "../hooks/reduxHooks";
 import './../scss/app.scss';
+import {Link} from "react-router-dom";
 
 const CartItem: React.FC<{ item: CartItemType }> = ({item}) => {
     const dispatch = useAppDispatch()
@@ -23,25 +24,27 @@ const CartItem: React.FC<{ item: CartItemType }> = ({item}) => {
     return (
         <div className="cart__item">
             <div className="cart__item-img">
-                <img
-                    className="pizza-block__image"
-                    src={item.imageUrl}
-                    alt="cartItem"
-                />
+                <Link to={`/fullItem/${item.id}`}>
+                    <img
+                        className="pizza-block__image"
+                        src={item.imageUrl}
+                        alt="cartItem"
+                    />
+                </Link>
             </div>
             <div className="cart__item-info">
                 <h3>{item.title}</h3>
                 <p>{item.type}, {item.size} л.</p>
             </div>
             <div className="cart__item-count">
-                <button disabled={item.count === 1 }
-                    className="button button--outline button--circle cart__item-count-minus"
-                    onClick= {() => onMinusItemHandler(item.id, item.size, item.type)}>
+                <button disabled={item.count === 1}
+                        className="button button--outline button--circle cart__item-count-minus"
+                        onClick={() => onMinusItemHandler(item.id, item.size, item.type)}>
                     <img src={minus} alt={"minus"}/>
                 </button>
                 <b>{item.count}</b>
                 <div className="button button--outline button--circle cart__item-count-plus"
-                     onClick={() => onPlusItemHandler(item.id, item.title,  item.price,  item.imageUrl,  item.type, item.size, item.count)}>
+                     onClick={() => onPlusItemHandler(item.id, item.title, item.price, item.imageUrl, item.type, item.size, item.count)}>
                     <img src={plus} alt={"plus"}/>
                 </div>
             </div>
